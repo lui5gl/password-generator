@@ -8,10 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      boxShadow: {
+        box_sm: "4px 4px 0 rgb(229 229 229 / 0.75)",
+        box_md: "5px 5px 0 rgb(229 229 229 / 0.75)",
       },
     },
   },
