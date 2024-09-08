@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       boxShadow: {
         box_sm: "4px 4px 0 rgb(229 229 229 / 0.75)",
-        box_md: "5px 5px 0 rgb(229 229 229 / 0.75)",
+        box_md: "8px 8px 0 rgb(229 229 229 / 0.75)",
       },
     },
   },
