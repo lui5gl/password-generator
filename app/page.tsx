@@ -12,12 +12,10 @@ export default function Home() {
   const [symbols, setSymbols] = useState(true);
   const [uppercase, setUppercase] = useState(true);
   const [lowercase, setLowercase] = useState(true);
-  const [range, setRange] = useState(15);
 
-  const passwordConfig = [range, symbols, uppercase, lowercase, numbers];
+  const passwordConfig = [symbols, uppercase, lowercase, numbers];
 
   const setPasswordConfig = [
-    setRange,
     setSymbols,
     setUppercase,
     setLowercase,
@@ -29,11 +27,8 @@ export default function Home() {
       <Background />
       <main className="grid min-h-screen place-content-center">
         <section className="z-10 grid gap-1 rounded-md bg-white px-10 py-5 shadow-box_md">
-          <h2 className="text-xl font-medium">Password generator</h2>
-          <Password
-            passwordConfig={passwordConfig}
-            setPasswordConfig={setPasswordConfig}
-          />
+          <h2 className="text-xl font-medium">Generador de contraseñas</h2>
+          <Password passwordConfig={passwordConfig} />
           <Configuration
             passwordConfig={passwordConfig}
             setPasswordConfig={setPasswordConfig}
