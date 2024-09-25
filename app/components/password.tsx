@@ -16,21 +16,10 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
 
     let characters = "";
 
-    if (capitals) {
-      characters += capitalCharacters;
-    }
-
-    if (lowercase) {
-      characters += lowercaseCharacters;
-    }
-
-    if (numbers) {
-      characters += numberCharacters;
-    }
-
-    if (symbols) {
-      characters += symbolCharacters;
-    }
+    capitals && (characters += capitalCharacters);
+    lowercase && (characters += lowercaseCharacters);
+    numbers && (characters += numberCharacters);
+    symbols && (characters += symbolCharacters);
 
     let password = "";
 
@@ -41,22 +30,26 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
     }
 
     if (password === "") {
-      password = "Select options";
+      password = "Debes seleccionar al menos una opción";
     }
 
     setPassword(password);
   };
 
   const handleCopyPassword = () => {
-    toast("Password successfully copied");
-    navigator.clipboard.writeText(password);
+    if (password === "Debes seleccionar al menos una opción") {
+      toast("Contraseña invalida");
+    } else {
+      toast("Contraseña copiada");
+      navigator.clipboard.writeText(password);
+    }
   };
 
   // Change range of password
   const range_btn = useRef<HTMLInputElement>(null);
 
   function handleChangeRange() {
-    setRange(range_btn.current?.value ? parseInt(range_btn.current.value) : 0);
+    setRange(range_btn.current?.valueAsNumber ?? 0);
     handleGeneratePassword();
   }
 
@@ -64,45 +57,20 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
     handleGeneratePassword();
   }, []);
 
-  // Text of legend
-  const password_strong =
-    range <= 6
-      ? "Muy mala ❌"
-      : range <= 11
-        ? "Débil 👎🏻"
-        : range <= 16
-          ? "Bien 👍🏻"
-          : range <= 25
-            ? "Excelente 🌟"
-            : "Perfecta 👌🏻";
-
-  // Styles of range
-  const line =
-    range <= 6
-      ? "border-red-500"
-      : range <= 11
-        ? "border-orange-500"
-        : range <= 16
-          ? "border-yellow-500"
-          : range <= 25
-            ? "border-green-500"
-            : "border-green-700";
-
-  const dot =
-    range <= 6
-      ? "accent-red-700"
-      : range <= 11
-        ? "accent-orange-700"
-        : range <= 16
-          ? "accent-yellow-700"
-          : range <= 25
-            ? "accent-green-700"
-            : "accent-green-900";
-
   return (
     <section className="flex flex-col gap-1 drop-shadow-sm">
       <fieldset className="flex rounded-md border px-2 pb-2">
-        <legend>{password_strong}</legend>
+        <legend>
+          {range <= 6
+            ? "Muy mala ❌"
+            : range <= 11
+              ? "Débil 👎🏻"
+              : range <= 16
+                ? "Bien 👍🏻"
+                : range <= 25
+                  ? "Excelente 🌟"
+                  : "Perfecta 👌🏻"}
+        </legend>
         <input
           value={password}
           spellCheck={false}
@@ -132,7 +100,16 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
         <div className="relative flex w-full items-center">
           <input
             className={
-              "absolute z-20 w-full appearance-none bg-transparent " + dot
+              "absolute z-20 w-full appearance-none bg-transparent " +
+              (range <= 6
+                ? "accent-red-700"
+                : range <= 11
+                  ? "accent-orange-700"
+                  : range <= 16
+                    ? "accent-yellow-700"
+                    : range <= 25
+                      ? "accent-green-700"
+                      : "accent-green-900")
             }
             type="range"
             max="50"
@@ -141,7 +118,20 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
             ref={range_btn}
             onChange={handleChangeRange}
           />
-          <hr className={"w-full rounded-full border-2 " + line} />
+          <hr
+            className={
+              "w-full rounded-full border-2 " +
+              (range <= 6
+                ? "border-red-500"
+                : range <= 11
+                  ? "border-orange-500"
+                  : range <= 16
+                    ? "border-yellow-500"
+                    : range <= 25
+                      ? "border-green-500"
+                      : "border-green-700")
+            }
+          />
         </div>
         <span>{range}</span>
       </div>
