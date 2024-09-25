@@ -26,7 +26,7 @@ export default function Home() {
     <>
       <Background />
       <main className="grid min-h-screen place-content-center">
-        <section className="z-10 grid gap-1 rounded-md bg-white px-10 py-5 shadow-box_md">
+        <section className="z-10 grid select-none gap-1 rounded-md bg-white px-10 py-5 shadow-box_md">
           <h2 className="text-xl font-medium">Generador de contraseñas</h2>
           <Password passwordConfig={passwordConfig} />
           <Configuration
@@ -35,7 +35,7 @@ export default function Home() {
           />
         </section>
       </main>
-      <Toaster position="top-center" />
+      <Toaster position="top-center" closeButton />
     </>
   );
 }
