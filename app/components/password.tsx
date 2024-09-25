@@ -5,7 +5,7 @@ import { toast } from "sonner";
 export default function Password({ passwordConfig }: { passwordConfig: any }) {
   const [numbers, symbols, capitals, lowercase] = passwordConfig;
   const [password, setPassword] = useState(String);
-  const [range, setRange] = useState(15);
+  const [range, setRange] = useState(25);
 
   // Generar contraseña
   const handleGeneratePassword = () => {
@@ -137,6 +137,7 @@ export default function Password({ passwordConfig }: { passwordConfig: any }) {
             type="range"
             max="50"
             min="1"
+            defaultValue={range}
             ref={range_btn}
             onChange={handleChangeRange}
           />
